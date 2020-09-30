@@ -1,5 +1,6 @@
 // if user add any notes, then adds to local Storage
 let addBtn = document.getElementById('addBtn');
+let notesObj;
 showNotes();
 addBtn.addEventListener("click", function (e) {
 
@@ -47,33 +48,33 @@ function showNotes() {
 // function to delete Node
 function deleteNote(index) {
 
-      let notes = localStorage.getItem("notes");
-      if (notes == null) {
+    let notes = localStorage.getItem("notes");
+    if (notes == null) {
         notesObj = [];
-      } else {
+    } else {
         notesObj = JSON.parse(notes);
-      }
-    
-      notesObj.splice(index, 1);
-      localStorage.setItem("notes", JSON.stringify(notesObj));
-      showNotes();
     }
 
+    notesObj.splice(index, 1);
+    localStorage.setItem("notes", JSON.stringify(notesObj));
+    showNotes();
+}
 
-    let search = document.getElementById('searchTxt');
-    search.addEventListener("input", function(){
-    
-        let inputVal = search.value.toLowerCase();
-        // console.log('Input event fired!', inputVal);
-        let noteCards = document.getElementsByClassName('noteCard');
-        Array.from(noteCards).forEach(function(element){
-            let cardTxt = element.getElementsByTagName("p")[0].innerText;
-            if(cardTxt.includes(inputVal)){
-                element.style.display = "block";
-            }
-            else{
-                element.style.display = "none";
-            }
-            // console.log(cardTxt);
-        })
+
+let srch = document.getElementById('searchTxt');
+srch.addEventListener("input", function () {
+
+    let inputVal = srch.value.toLowerCase();
+    // console.log('Input event fired!', inputVal);
+    let noteCards = document.getElementsByClassName('noteCard');
+    Array.from(noteCards).forEach(function (element) {
+        let cardTxt = element.getElementsByTagName("p")[0].innerText;
+        if (cardTxt.includes(inputVal)) {
+            element.style.display = "block";
+        }
+        else {
+            element.style.display = "none";
+        }
+        // console.log(cardTxt);
     })
+})
